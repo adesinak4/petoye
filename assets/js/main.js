@@ -171,4 +171,30 @@ document.addEventListener('DOMContentLoaded', () => {
     aos_init();
   });
 
+  /**
+   * Gallery Item Filter
+   */
+  const filterButtons = document.querySelectorAll('#portfolio-flters li');
+  const allItems = document.querySelectorAll('.portfolio-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filterValue = button.getAttribute('data-filter');
+
+      // Remove 'filter-active' class from all buttons and add to the current clicked one
+      document.querySelectorAll('#portfolio-flters li').forEach(btn => btn.classList.remove('filter-active'));
+      button.classList.add('filter-active');
+
+      // Filter gallery items
+      allItems.forEach(item => {
+        if (filterValue === '*' || item.classList.contains(filterValue.substring(1))) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+
 });
